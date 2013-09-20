@@ -1,4 +1,7 @@
 class GoalsController < ApplicationController
+  before_filter :require_login
+  
+  
   # GET /goals
   # GET /goals.json
   def index
