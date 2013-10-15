@@ -1,6 +1,8 @@
 class UpdatesController < ApplicationController
   before_filter :require_login  
-   before_filter :limit_update_access, :except =>[:index, :new]  # GET /updates
+   before_filter :limit_update_access, :except =>[:index, :new, :create]
+   
+    # GET /updates
   # GET /updates.json
   def index
     @updates = Update.all
@@ -86,7 +88,7 @@ class UpdatesController < ApplicationController
   # only the user can edit their own goals
 	def limit_update_access
 	  @update = Update.find(params[:id])
-		if @update.id != current_user.id
+		if @update.user_id != current_user.id
 			render :text => "Hey what are you doing here. You do not have permission to access this update"
 		end
 	end

@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   before_filter :require_login  
-  before_filter :limit_goal_access, :except =>[:index, :new]
+  before_filter :limit_goal_access, :except =>[:index, :new, :create]
   
   
   # GET /goals
@@ -91,7 +91,7 @@ class GoalsController < ApplicationController
   # only the user can edit their own goals
 	def limit_goal_access
 	  @goal = Goal.find(params[:id])
-		if @goal.id != current_user.id
+		if @goal.user_id != current_user.id
 			render :text => "Hey what are you doing here. You do not have permission to access this goal"
 		end
 	end
