@@ -3,7 +3,7 @@ class CreateGoals < ActiveRecord::Migration
     create_table :goals do |t|
       t.string :name
       t.text :description
-      t.boolean :complete, :default => fal
+      t.boolean :complete, :default => false
 
       t.timestamps
     end
