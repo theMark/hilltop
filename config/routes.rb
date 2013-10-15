@@ -1,4 +1,7 @@
 Hilltop::Application.routes.draw do
+  resources :updates
+
+
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
@@ -8,7 +11,9 @@ Hilltop::Application.routes.draw do
   # get "sessions/new"
   # get "users/new"
 
-  resources :goals
+  resources :goals do
+    resources :updates
+  end
 
 
   # The priority is based upon order of creation:

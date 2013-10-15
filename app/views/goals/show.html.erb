@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <p>
   <b>Name:</b>
   <%= @goal.name %>
@@ -14,6 +16,39 @@
   <b>Complete:</b>
   <%= @goal.complete %>
 </p>
+
+
+
+<h2>Yo Self! Add an update!</h2>
+<%= form_for([@goal, Update.new]) do |f| %>
+<%= f.hidden_field :user_id, :value => current_user.id %> 
+<%= f.hidden_field :goal_id, :value => @goal.id %> 
+	<p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
+<h2>Updates</h2>
+<% @goal.updates.each do |update| %>
+<p>
+	<strong><%= update.title %></strong><small><%= time_ago_in_words(update.created_at) %></small><br />
+	<%= update.body %>
+</p>
+
+<% end %>
+
+
+
+
 
 
 <%= link_to 'Edit', edit_goal_path(@goal) %> |

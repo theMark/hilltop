@@ -1,12 +1,13 @@
 class GoalsController < ApplicationController
-  before_filter :require_login
+  before_filter :require_login  
+  before_filter :limit_goal_access, :except =>[:index, :new]
   
   
   # GET /goals
   # GET /goals.json
   def index
-    @goals = Goal.all
-
+    @goals = current_user.goals
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @goals }
@@ -16,7 +17,8 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
-    @goal = Goal.find(params[:id])
+    @goal = Goal.find(params[:id]) 
+    @update = Update.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -83,4 +85,15 @@ class GoalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  protected
+
+  # only the user can edit their own goals
+	def limit_goal_access
+	  @goal = Goal.find(params[:id])
+		if @goal.id != current_user.id
+			render :text => "Hey what are you doing here. You do not have permission to access this goal"
+		end
+	end
+  
 end
