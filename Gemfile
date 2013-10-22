@@ -4,8 +4,11 @@ ruby '1.9.3'
 gem 'rails', '3.2.14'
 gem 'sorcery'
 
+gem 'pg'
+gem 'thin'
+
+
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
@@ -24,7 +27,6 @@ end
 gem 'jquery-rails'
 
 group :development do
-  # gem 'sqlite3'
 end
 
 # To use ActiveModel has_secure_password
