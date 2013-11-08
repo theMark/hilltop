@@ -1,30 +1,16 @@
 <h1>Listing goals</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Complete</th>
-    <th>user ID</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+
 
 <% @goals.each do |goal| %>
-  <tr>
-    <td><%= goal.name %></td>
-    <td><%= goal.description %></td>
-    <td><%= goal.complete %></td>
-    <td><%= goal.user_id %></td>
-    <td><%= link_to 'Show', goal %></td>
-    <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
-    <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+<div style="margin-bottom:30px;">
+
+<h4><%= link_to "#{goal.name}", goal %></h4>
+<p><%= goal.description %> - Complete (<%= goal.complete %>) - User(<%= goal.user_id %>) <br />
+		<%= link_to 'Edit', edit_goal_path(goal) %> | <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+</div>
+
 <% end %>
 
-</table>
 
-<br />
-
-<%= link_to 'New Goal', new_goal_path %>
+<%= link_to 'New Goal', new_goal_path, :class => "button round" %>

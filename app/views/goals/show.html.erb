@@ -2,49 +2,50 @@
 
 
 
-<p>
-  <b>Name:</b>
-  <%= @goal.name %>
-</p>
+<div class="row">
+  <div class="small-10 small-centered columns">
+		<h2><%= @goal.name %></h2>
+		<p><%= @goal.description %> - Complete <%= @goal.complete %></p>
+		
+		<h4>Yo Self! Add an update!</h4>
+		<%= form_for([@goal, Update.new]) do |f| %>
+		<%= f.hidden_field :user_id, :value => current_user.id %> 
+		<%= f.hidden_field :goal_id, :value => @goal.id %> 
+		  <p>
+		    <%= f.label :body %>
+		    <%= f.text_area :body %>
+		  </p>
+			<p>
+		    <%= f.label :title %>
+		    <%= f.text_field :title %>
+		  </p>
+		
+		  <p>
+		    <%= f.submit "Yeeeah, Submit It Dawg!", :class => "button round" %>
+		  </p>
+		<% end %>
+		
+		
+		<h4>Your Progress...</h4>
+		<% @goal.updates.order("created_at DESC").each do |update| %>
+		<p>
+			<strong><%= update.title %></strong> <%= time_ago_in_words(update.created_at) %><br />
+			<%= update.body %>
+		</p>
 
-<p>
-  <b>Description:</b>
-  <%= @goal.description %>
-</p>
-
-<p>
-  <b>Complete:</b>
-  <%= @goal.complete %>
-</p>
+		<% end %>
+		
+		
+	</div>
+</div>
 
 
 
-<h2>Yo Self! Add an update!</h2>
-<%= form_for([@goal, Update.new]) do |f| %>
-<%= f.hidden_field :user_id, :value => current_user.id %> 
-<%= f.hidden_field :goal_id, :value => @goal.id %> 
-	<p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
 
 
-<h2>Updates</h2>
-<% @goal.updates.each do |update| %>
-<p>
-	<strong><%= update.title %></strong><small><%= time_ago_in_words(update.created_at) %></small><br />
-	<%= update.body %>
-</p>
 
-<% end %>
+
+
 
 
 
