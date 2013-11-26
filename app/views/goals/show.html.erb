@@ -2,66 +2,64 @@
 
 <div class="row" style="margin-top:25px;">
   <div class="small-8 columns">
+		<div class="goal-block">
+			<div class="goal-header">
+				<h2><%= @goal.name %></h2>
+					<% if @goal.complete %>
+						<span class="round secondary label">Complete</span>
+					<% else %>
+						<span class="round success label">Active</span>
+					<% end %>
+					&nbsp;<span class="lighter-text">- <%= @goal.created_at.to_date %></span>
+					&nbsp;<span class="lighter-text">- <%= @goal.updates.size %> Updates</span>
+			</div>
+			<h4>Yo Self! Add an update!</h4>
+			<%= form_for([@goal, Update.new]) do |f| %>
+			<%= f.hidden_field :user_id, :value => current_user.id %> 
+			<%= f.hidden_field :goal_id, :value => @goal.id %> 
+			  <p>
+			    <%= f.label :body %>
+			    <%= f.text_area :body %>
+			  </p>
+				<p>
+			    <%= f.label :title %>
+			    <%= f.text_field :title %>
+			  </p>
 
+			    <%= f.submit "Yeeeah, Submit It Dawg!", :class => "button round" %>
+			<% end %>
+		</div>
+			<h4>Your Progress...</h4>
+			<% @goal.updates.order("created_at DESC").each do |update| %>
+			<div class="goal-block">
+			<p>
+				<strong><%= update.title %></strong><br />
+				<%= update.body %><br />
+				<span class="lighter-text"><%= time_ago_in_words(update.created_at) %></span>
+			</p>
+			</div>
+			
+			<% end %>
+		
+		
 	</div>
 	<div class="small-4 columns">
-			4 colums
+		<div class="sidebar">
+		<p>
+			<strong>Description</strong><br />
+			<%= @goal.description %>
+		</p>
+		<%= link_to 'Edit', edit_goal_path(@goal) %> | <%= link_to 'Destroy', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>
+		
+		</div>
+		<br />
+		<br />
+		<ul>
+		<% @goal.related_goals.each do |g| %>
+			<li><%= link_to "#{g.name}", g %></li>
+		<% end %>
+		</ul>
 	</div>
   
 </div>
 
-
-
-<div class="row">
-  <div class="small-10 small-centered columns">
-		<h2><%= @goal.name %></h2>
-		<p><%= @goal.description %> - Complete <%= @goal.complete %></p>
-		
-		<h4>Yo Self! Add an update!</h4>
-		<%= form_for([@goal, Update.new]) do |f| %>
-		<%= f.hidden_field :user_id, :value => current_user.id %> 
-		<%= f.hidden_field :goal_id, :value => @goal.id %> 
-		  <p>
-		    <%= f.label :body %>
-		    <%= f.text_area :body %>
-		  </p>
-			<p>
-		    <%= f.label :title %>
-		    <%= f.text_field :title %>
-		  </p>
-		
-		  <p>
-		    <%= f.submit "Yeeeah, Submit It Dawg!", :class => "button round" %>
-		  </p>
-		<% end %>
-		
-		
-		<h4>Your Progress...</h4>
-		<% @goal.updates.order("created_at DESC").each do |update| %>
-		<p>
-			<strong><%= update.title %></strong> <%= time_ago_in_words(update.created_at) %><br />
-			<%= update.body %>
-		</p>
-
-		<% end %>
-		
-		
-	</div>
-</div>
-
-
-<%= link_to 'Edit', edit_goal_path(@goal) %> | <%= link_to 'Destroy', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>
-
-
-
-
-
-
-
-
-
-
-
-
-<%= link_to 'Edit', edit_goal_path(@goal) %> |
-<%= link_to 'Back', goals_path %>

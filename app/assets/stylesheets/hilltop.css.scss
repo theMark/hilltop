@@ -9,8 +9,23 @@
 	border-radius:10px;
 	-webkit-border-radius:10px;
 	margin-bottom:15px;
+	p {
+		margin-bottom:0;
+	}
 }
 
 .lighter-text {
 	color:#aaa;
+}
+
+
+.goal-header {
+	background:#f7f5f5;
+	margin:-15px;
+	margin-bottom:15px;
+	padding:15px;
+}
+
+ .sidebar {
+	color:#979797;
 }

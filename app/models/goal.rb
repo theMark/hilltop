@@ -9,4 +9,10 @@ class Goal < ActiveRecord::Base
   has_many :updates , :dependent => :destroy
   belongs_to :user
   
+	
+  
+  def related_goals
+    Goal.where("user_id = ?", user_id).limit(5)
+  end
+  
 end
