@@ -1,16 +1,37 @@
-<h1>Listing goals</h1>
-
-
-
-<% @goals.each do |goal| %>
-<div style="margin-bottom:30px;">
-
-<h4><%= link_to "#{goal.name}", goal %></h4>
-<p><%= goal.description %> - Complete (<%= goal.complete %>) - User(<%= goal.user_id %>) <br />
-		<%= link_to 'Edit', edit_goal_path(goal) %> | <%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<div class="row" style="margin-top:25px;">
+	<div class="small-12 columns">
+		<p>Go after it! <%= link_to "Susan Boyle chases her dream and rises above the odds", "http://www.youtube.com/watch?v=jca_p_3FcWA" %></p>
+	</div>
 </div>
 
-<% end %>
+
+<div class="row">
+  <div class="small-8 columns">
 
 
-<%= link_to 'New Goal', new_goal_path, :class => "button round" %>
+		<% @goals.each do |goal| %>
+		<div class="goal-block">
+			<h3><%= link_to "#{goal.name}", goal %></h3>
+			<p>
+				<%= goal.description %>
+			<br />
+				<% if goal.complete %>
+					<span class="round secondary label">Complete</span>
+				<% else %>
+					<span class="round success label">Active</span>
+				<% end %>
+				&nbsp;<span class="lighter-text"><%= goal.updates.size %> Updates</span>
+			</p>
+		</div>
+
+		<% end %>
+	</div>
+  <div class="small-4 columns">
+		<%= link_to '+ New Goal', new_goal_path %>
+	</div>
+</div>
+
+
+
+
+

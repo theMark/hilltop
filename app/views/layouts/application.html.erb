@@ -1,48 +1,48 @@
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<html lang="en">
   <head>
-  	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  	<!-- Uncomment to make IE8 render like IE7 -->
-  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+    <title><%= content_for?(:title) ? yield(:title) : "hilltop" %></title>
 
-  	<!-- Set the viewport width to device width for mobile -->
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  	<title><%= content_for?(:title) ? yield(:title) : "Hilltop" %></title>
-
-  	<%= stylesheet_link_tag    "application" %>
-  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
   </head>
 
-	<body>
-	        <div class="motivate-me">Yo Self! Go out there and kick life in the balls! -past Self (10/10/2013)</div>
-	        <%#= debug(params) %>
+  <body>
+	
+	
+	<div class="contain-to-grid">
+		<nav class="top-bar" data-topbar>
+		  <ul class="title-area">
+		    <li class="name">
+		      <h1><a href="#">Hilltop</a></h1>
+		    </li>
+		  </ul>
 
-	 <div class="user_nav">
-	   <% if current_user %>
-	     Logged in as <%= current_user.email %>.
-	     <%= link_to "Log out", logout_path %>
-	   <% else %>
-	     <%= link_to "Sign up", signup_path %> or
-	     <%= link_to "Log in", login_path  %>.
-	   <% end %>
-	 | <%= link_to "Goals", goals_path %>
-	 </div>        
+		  <section class="top-bar-section">
+		    <!-- Right Nav Section -->
+		    <ul class="right">
+		        <% if current_user %>
+		        <li><%= link_to "Goals", goals_path %></li>
+             <li><%= link_to "Log out #{current_user.email}", logout_path %></li>
+           <% else %>
+             <li><%= link_to "Sign up", signup_path %></li>
+ 						 <li><%= link_to "Log in", login_path  %></li>
+           <% end %>
+		        <!-- <ul class="dropdown">
+		          <li><a href="#">First link in dropdown</a></li>
+		        </ul> -->
+		    </ul>
 
-	<% flash.each do |name, msg| %>
-	   <%= content_tag :div, msg, :id => "flash_#{name}" %>
-	 <% end %>
 
-	<%= yield %>
+		  </section>
+		</nav>
+	</div>
 
-    
+    <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

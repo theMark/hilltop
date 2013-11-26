@@ -1,5 +1,15 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row" style="margin-top:25px;">
+  <div class="small-8 columns">
+
+	</div>
+	<div class="small-4 columns">
+			4 colums
+	</div>
+  
+</div>
+
 
 
 <div class="row">
@@ -40,6 +50,7 @@
 </div>
 
 
+<%= link_to 'Edit', edit_goal_path(@goal) %> | <%= link_to 'Destroy', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 
 
