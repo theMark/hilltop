@@ -44,21 +44,34 @@
 		
 	</div>
 	<div class="small-4 columns">
+		
 		<div class="sidebar">
 		<p>
-			<strong>Description</strong><br />
-			<%= @goal.description %>
+				<%= link_to 'Edit', edit_goal_path(@goal) %> | <%= link_to 'Destroy', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>
 		</p>
-		<%= link_to 'Edit', edit_goal_path(@goal) %> | <%= link_to 'Destroy', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>
+			
+			<p>
+				<strong>Description</strong><br />
+				<%= @goal.description %>
+			</p>
+			<p>
+				<strong>Why</strong><br />
+				<%= @goal.why %>
+			</p>
+			
+			<br />
+			<br />
+				<p style="margin-bottom:0;">
+					<strong>Other goals</strong>
+				</p>
+			<ul>
+			<% @goal.related_goals.each do |g| %>
+				<li><%= link_to "#{g.name}", g %></li>
+			<% end %>
+			</ul>
 		
 		</div>
-		<br />
-		<br />
-		<ul>
-		<% @goal.related_goals.each do |g| %>
-			<li><%= link_to "#{g.name}", g %></li>
-		<% end %>
-		</ul>
+
 	</div>
   
 </div>
