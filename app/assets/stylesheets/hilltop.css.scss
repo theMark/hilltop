@@ -8,6 +8,18 @@
 	background:#fff;
 	border-radius:10px;
 	-webkit-border-radius:10px;
+	margin-bottom:20px;
+	padding-bottom:0;
+	p {
+		margin-bottom:0;
+	}
+}
+
+.update-block {
+	padding:15px;
+	background:#fff;
+	border-radius:10px;
+	-webkit-border-radius:10px;
 	margin-bottom:15px;
 	p {
 		margin-bottom:0;
@@ -28,4 +40,8 @@
 
  .sidebar {
 	color:#979797;
+}
+
+.goal-text-area-height {
+	height:100px;
 }

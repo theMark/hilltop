@@ -4,7 +4,7 @@
   <div class="small-8 columns">
 		<div class="goal-block">
 			<div class="goal-header">
-				<h2><%= @goal.name %></h2>
+				<h2><strong><%= @goal.name %></strong></h2>
 					<% if @goal.complete %>
 						<span class="round secondary label">Complete</span>
 					<% else %>
@@ -13,29 +13,32 @@
 					&nbsp;<span class="lighter-text">- <%= @goal.created_at.to_date %></span>
 					&nbsp;<span class="lighter-text">- <%= @goal.updates.size %> Updates</span>
 			</div>
-			<h4>Yo Self! Add an update!</h4>
+			<h5>Yo Self! Add an update!</h5>
 			<%= form_for([@goal, Update.new]) do |f| %>
 			<%= f.hidden_field :user_id, :value => current_user.id %> 
 			<%= f.hidden_field :goal_id, :value => @goal.id %> 
-			  <p>
-			    <%= f.label :body %>
-			    <%= f.text_area :body %>
-			  </p>
-				<p>
-			    <%= f.label :title %>
-			    <%= f.text_field :title %>
-			  </p>
-
-			    <%= f.submit "Yeeeah, Submit It Dawg!", :class => "button round" %>
+			
+			<div class="row">
+		    <div class="large-12 columns">
+		 			<%= f.text_field :title, :placeholder => "Title" %>
+		    </div>
+		  </div>
+			
+			<div class="row">
+		    <div class="large-12 columns">
+		 			<%= f.text_area :body, :placeholder => "So what do you have to say...", :class => "goal-text-area-height" %>
+		    </div>
+		  </div>
+			    <%= f.submit "Yeeeah, Submit It!", :class => "button round" %>
 			<% end %>
 		</div>
 			<h4>Your Progress...</h4>
 			<% @goal.updates.order("created_at DESC").each do |update| %>
-			<div class="goal-block">
+			<div class="update-block">
 			<p>
 				<strong><%= update.title %></strong><br />
 				<%= update.body %><br />
-				<span class="lighter-text"><%= time_ago_in_words(update.created_at) %></span>
+				<span class="lighter-text"><%= time_ago_in_words(update.created_at) %> ago</span>
 			</p>
 			</div>
 			
