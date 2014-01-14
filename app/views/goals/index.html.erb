@@ -3,14 +3,26 @@
 		<p>Go after it! <%= link_to "Susan Boyle chases her dream and rises above the odds", "http://www.youtube.com/watch?v=jca_p_3FcWA", :target => "_blank" %></p>
 	</div>
 </div>
-
+<div class="row">
+	<div class="small-12 columns">
+		<h1>Your Goals <small>Now let's do this!</small></h1>
+	</div>
+</div>
 
 <div class="row">
   <div class="small-8 columns">
 
 
 		<% @goals.each do |goal| %>
-		<div class="goal-block">
+		<div class="update-block">
+			<div class="counter-block">
+				<span class="days-in">
+					<%= (Date.today.to_date - goal.created_at.to_date).to_i %> Days In
+				</span>
+				<span class="days-left">
+					<%= (goal.get_expires_date.to_date -  Date.today.to_date).to_i %> Days Left
+				</span>
+			</div>
 			<h3><%= link_to "#{goal.name}", goal %></h3>
 			<p>
 				<%= goal.description %>

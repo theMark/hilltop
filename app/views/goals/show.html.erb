@@ -4,14 +4,12 @@
   <div class="small-8 columns">
 		<div class="goal-block">
 			<div class="goal-header">
+							<% if @goal.complete %>
+								<span class="round secondary label right ">Complete</span>
+							<% else %>
+								<span class="round success label right">Active</span>
+							<% end %>
 				<h2><strong><%= @goal.name %></strong></h2>
-					<% if @goal.complete %>
-						<span class="round secondary label">Complete</span>
-					<% else %>
-						<span class="round success label">Active</span>
-					<% end %>
-					&nbsp;<span class="lighter-text">- <%= @goal.created_at.to_date %></span>
-					&nbsp;<span class="lighter-text">- <%= @goal.updates.size %> Updates</span>
 			</div>
 			<h5>Yo Self! Add an update!</h5>
 			<%= form_for([@goal, Update.new]) do |f| %>
@@ -57,14 +55,21 @@
 				<strong>Description</strong><br />
 				<%= @goal.description %>
 			</p>
+			
 			<p>
 				<strong>Why</strong><br />
 				<%= @goal.why %>
 			</p>
 			
-			<br />
-			<br />
-				<p style="margin-bottom:0;">
+			<p>
+				<strong>Stats</strong><br />
+			Start Date <%= @goal.created_at.to_date %><br />
+			End Date: <%= @goal.get_expires_date.to_date %><br />
+			<%= (Date.today.to_date - @goal.created_at.to_date).to_i %> Days In<br />
+			<%= (@goal.get_expires_date.to_date -  Date.today.to_date).to_i %> Days Left<br />
+			<%= @goal.updates.size %> Updates <br />
+			</p>
+							<p style="margin-bottom:0;">
 					<strong>Other goals</strong>
 				</p>
 			<ul>

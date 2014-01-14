@@ -6,7 +6,7 @@ class GoalsController < ApplicationController
   # GET /goals
   # GET /goals.json
   def index
-    @goals = current_user.goals
+    @goals = current_user.goals.order("created_at DESC")
     
     respond_to do |format|
       format.html # index.html.erb

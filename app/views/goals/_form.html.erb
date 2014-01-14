@@ -27,6 +27,11 @@
     <%= f.label :complete %><br />
     <%= f.check_box :complete %>
   </div>
+   <div class="field">
+    <%= f.label :expires_at %><br />
+    <%= f.date_select :expires_at, :include_blank => true, :use_month_numbers => true, :order => [:month, :day, :year] %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
