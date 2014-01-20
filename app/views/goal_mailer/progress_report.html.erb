@@ -10,7 +10,7 @@
     </p>
 		<p>
 		<ul>
-		<% @user.goals.each do |goal| %>
+		<% @user.goals.active.each do |goal| %>
 			<li><%= link_to("#{goal.name}", goal_url(goal)) %></li>
 		<% end %>
 		</ul>
@@ -20,7 +20,7 @@
     </p>
 		
 		<p><strong>Here's what you have done recently</strong></p>
-			<% @user.goals.each do |goal| %>
+			<% @user.goals.active.each do |goal| %>
 			<h4><%= goal.name %></h4>
 			<p><%= goal.updates.recent.size %> recent updates</p>
 			<ul>
