@@ -10,10 +10,7 @@ class Goal < ActiveRecord::Base
   belongs_to :user
   
   scope :recent, lambda { where("created_at >= ?", 4.days.ago) }
-  
-  def active_goals
-    Goal.where("status = ?", "active")
-	end
+  scope :active, lambda { where("status = ?", "active") }
   
   def related_goals
     Goal.where("user_id = ?", user_id).limit(5)
