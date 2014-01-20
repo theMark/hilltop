@@ -9,7 +9,11 @@ class Goal < ActiveRecord::Base
   has_many :updates , :dependent => :destroy
   belongs_to :user
   
-	
+  scope :recent, lambda { where("created_at >= ?", 4.days.ago) }
+  
+  def active_goals
+    Goal.where("status = ?", "active")
+	end
   
   def related_goals
     Goal.where("user_id = ?", user_id).limit(5)
