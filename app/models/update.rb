@@ -6,4 +6,9 @@ class Update < ActiveRecord::Base
   belongs_to :goal, :counter_cache => true
   belongs_to :user
   
+  
+  scope :recent, lambda { where("created_at >= ?", 4.days.ago) }
+  
+  
+  
 end

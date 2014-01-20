@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Ahhhh Yeah, <%= @user.email %></h1>
+    <p>
+      <strong>Remember these...</strong>
+    </p>
+		<p>
+		<ul>
+		<% @user.goals.each do |goal| %>
+			<li><%= link_to("#{goal.name}", goal_url(goal)) %></li>
+		<% end %>
+		</ul>
+		</p>
+    <p>
+      Well I'm here to remind you that you really wanted to accomplish these goals.
+    </p>
+		
+		<p><strong>Here's what you have done recently</strong></p>
+			<% @user.goals.each do |goal| %>
+			<h4><%= goal.name %></h4>
+			<p><%= goal.updates.recent.size %> recent updates</p>
+			<ul>
+				<% goal.updates.recent.each do |u| %>
+					<li> <strong><%= u.title %></strong> - <%= u.body %> test</li>
+				<% end %>
+			</ul>
+			<% end %>
+
+    <p>Ok. Bye for now.</p>
+  </body>
+</html>
