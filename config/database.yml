@@ -8,7 +8,7 @@ development:
   database: hilltop_development
   encoding: utf8
   username: hilltop
-  password: 
+  password: hilltop
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

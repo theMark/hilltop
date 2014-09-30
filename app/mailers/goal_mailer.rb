@@ -1,5 +1,5 @@
 class GoalMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "team@hilltop.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,6 +9,6 @@ class GoalMailer < ActionMailer::Base
   def progress_report(user)
     @greeting = "Hi"
     @user = user
-    mail :to => user.email, :subject => "Hilltop Checking in..."
+    mail :to => user.email, :subject => "Are you closer to being awesomer? Keep going!"
   end
 end

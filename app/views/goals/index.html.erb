@@ -11,32 +11,41 @@
 
 <div class="row">
   <div class="small-8 columns">
+    <% if  @goals.active.empty? %>
+      <p>No active goals in here :( &nbsp; <%= link_to "You should create a goal :)", new_goal_path %></p>
+     <% else %>
+  		<% @goals.active.each do |goal| %>
+  		<div class="update-block">
+  			<div class="counter-block">
+  				<span class="days-in">
+  					<%= (Date.today.to_date - goal.created_at.to_date).to_i %> Days In
+  				</span>
+  				<span class="days-left">
+  					<%= (goal.get_expires_date.to_date -  Date.today.to_date).to_i %> Days Left
+  				</span>
+  			</div>
+  			<h3><%= link_to "#{goal.name}", goal %></h3>
+  			<p>
+  				<%= goal.description %>
+  			<br />
+  				<% if goal.complete %>
+  					<span class="round secondary label">Complete</span>
+  				<% else %>
+  					<span class="round success label">Active</span>
+  				<% end %>
+  				&nbsp;<span class="lighter-text"><%= goal.updates.size %> Updates</span>
+  			</p>
+      <% end %>
 
-
-		<% @goals.active.each do |goal| %>
-		<div class="update-block">
-			<div class="counter-block">
-				<span class="days-in">
-					<%= (Date.today.to_date - goal.created_at.to_date).to_i %> Days In
-				</span>
-				<span class="days-left">
-					<%= (goal.get_expires_date.to_date -  Date.today.to_date).to_i %> Days Left
-				</span>
-			</div>
-			<h3><%= link_to "#{goal.name}", goal %></h3>
-			<p>
-				<%= goal.description %>
-			<br />
-				<% if goal.complete %>
-					<span class="round secondary label">Complete</span>
-				<% else %>
-					<span class="round success label">Active</span>
-				<% end %>
-				&nbsp;<span class="lighter-text"><%= goal.updates.size %> Updates</span>
-			</p>
 		</div>
 
 		<% end %>
+
+          <h3>Past Goals...</h3>
+      <% @goals.not_active.each do |goal| %>
+        <p><%= link_to("#{goal.name}", goal_path(goal)) %></p>
+      <% end %>
+
 	</div>
   <div class="small-4 columns">
 		<%= link_to '+ New Goal', new_goal_path %>
