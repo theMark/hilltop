@@ -1,3 +1,5 @@
+
+
 <div class="row" style="margin-top:25px;">
 	<div class="small-12 columns">
 		<p>Go after it! <%= link_to "Susan Boyle chases her dream and rises above the odds", "http://www.youtube.com/watch?v=jca_p_3FcWA", :target => "_blank" %></p>
@@ -10,7 +12,8 @@
 </div>
 
 <div class="row">
-  <div class="small-8 columns">
+  <div class="small-12 medium-8 columns">
+    
     <% if  @goals.active.empty? %>
       <p>No active goals in here :( &nbsp; <%= link_to "You should create a goal :)", new_goal_path %></p>
      <% else %>
@@ -47,7 +50,7 @@
       <% end %>
 
 	</div>
-  <div class="small-4 columns">
+  <div class="small-12 medium-4 columns">
 		<%= link_to '+ New Goal', new_goal_path %>
 	</div>
 </div>

@@ -7,7 +7,7 @@ gem 'sorcery'
 gem 'pg'
 gem 'thin'
 # gem 'foundation-rails'
-gem "foundation-rails", "~> 5.0.2.0"
+gem "foundation-rails", "~> 5.4.5"
 
 group :production do
   gem 'rails_12factor'
