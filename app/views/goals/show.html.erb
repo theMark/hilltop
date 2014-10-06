@@ -24,6 +24,11 @@
 		 			<%= f.text_area :body, :placeholder => "So what do you have to say...", :class => "goal-text-area-height" %>
 		    </div>
 		  </div>
+			<div class="row">
+		    <div class="large-12 columns">
+		 			<%= f.select :mood, options_for_select(%w[happy sad angry depressed chill like-a-boss meh pumped stressed bored]), :prompt => "What's your mood?" %>
+		    </div>
+		  </div>
 			    <%= f.submit "Yeeeah, Submit It!", :class => "button round" %>
 			<% end %>
 		</div>
@@ -33,7 +38,8 @@
 			<p>
 				<strong><%= update.title %></strong><br />
 				<%= update.body %><br />
-				<span class="lighter-text"><%= time_ago_in_words(update.created_at) %> ago</span>
+				<span class="lighter-text"><%= time_ago_in_words(update.created_at) %> ago 
+					<% unless update.mood.blank? %> &amp; <%= update.mood %></span><% end %>
 			</p>
 			</div>
 			
@@ -47,6 +53,8 @@
 		<p>
 				<%= link_to 'Edit', edit_goal_path(@goal) %> 
 		</p>
+
+
 			
 			<p>
 				<strong>Description</strong><br />
