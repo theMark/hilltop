@@ -25,7 +25,7 @@
 			<p><%= goal.updates.recent.size %> recent updates</p>
 			<ul>
 				<% goal.updates.recent.each do |u| %>
-					<li> <strong><%= u.title %></strong> - <%= u.body %> test</li>
+					<li> <strong><%= u.title %></strong> - <%= u.body %> - <em><%= u.created_at.strftime("%b %e, %A, %l%p") %></em></li>
 				<% end %>
 			</ul>
 			<% end %>
