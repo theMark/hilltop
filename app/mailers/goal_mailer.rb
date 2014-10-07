@@ -9,6 +9,6 @@ class GoalMailer < ActionMailer::Base
   def progress_report(user)
     @greeting = "Hi"
     @user = user
-    mail :to => user.email, :subject => "Keep going! Hilltop progress report."
+    mail :to => user.email, :subject => "Keep going #{user.email}! Hilltop progress report #{Date.today}."
   end
 end
