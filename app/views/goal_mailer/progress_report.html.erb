@@ -24,7 +24,7 @@
 			<h4><%= goal.name %></h4>
 			<p><%= goal.updates.recent.size %> recent updates</p>
 			<ul>
-				<% goal.updates.recent.each do |u| %>
+				<% goal.updates.recent.order("created_at DESC").each do |u| %>
 					<li> <strong><%= u.title %></strong> - <%= u.body %> - <em><%= u.created_at.strftime("%b %e, %A, %l%p") %></em></li>
 				<% end %>
 			</ul>
