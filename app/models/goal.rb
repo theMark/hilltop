@@ -11,8 +11,10 @@ class Goal < ActiveRecord::Base
   
   scope :recent, lambda { where("created_at >= ?", 4.days.ago) }
   scope :active, lambda { where("status = ? AND created_at >= ?", "active", 30.days.ago) }
-  scope :not_active, lambda { where("status != ? AND created_at < ?", "active", 30.days.ago) }
-  
+  scope :not_active, lambda { where("status != ?", "active") }
+
+
+
   def related_goals
     Goal.where("user_id = ?", user_id).limit(5)
   end

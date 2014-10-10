@@ -46,7 +46,7 @@
 
           <h3>Past Goals...</h3>
       <% @goals.not_active.each do |goal| %>
-        <p><%= link_to("#{goal.name}", goal_path(goal)) %></p>
+        <p><%= link_to("#{goal.name}", goal_path(goal)) %> - <%= goal.status %> </p>
       <% end %>
 
 	</div>
