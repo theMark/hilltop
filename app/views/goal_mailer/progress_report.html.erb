@@ -4,32 +4,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Ahhhh Yeah, <%= @user.email %></h1>
+    <h1>Your <%= @user.goals.active.size %> Goals <%= @user.email %></h1>
     <p>
-      <strong>Remember these...</strong>
+      <strong>You have <%= @user.goals.active.size %> goals you are working toward. Everyday take a step toward accomplishing them. Never settle. Keep climbing. I'll see you at the hill top.</strong>
     </p>
 		<p>
-		<ul>
-		<% @user.goals.active.each do |goal| %>
-			<li><%= link_to("#{goal.name}", goal_url(goal)) %></li>
-		<% end %>
-		</ul>
+    <%= link_to "Hilltop", root_url %>
 		</p>
-    <p>
-      I'm here to remind you that you really wanted to accomplish these goals.
-    </p>
-		
-		<p><strong>Here's what you have done recently</strong></p>
-			<% @user.goals.active.each do |goal| %>
-			<h4><%= goal.name %></h4>
-			<p><%= goal.updates.recent.size %> recent updates</p>
-			<ul>
-				<% goal.updates.recent.order("created_at DESC").each do |u| %>
-					<li> <strong><%= u.title %></strong> - <%= u.body %> - <em><%= u.created_at.strftime("%b %e, %A, %l%p") %></em></li>
-				<% end %>
-			</ul>
-			<% end %>
 
-    <p>Ok. Bye for now.</p>
   </body>
 </html>
